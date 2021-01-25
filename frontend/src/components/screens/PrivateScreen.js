@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { getPrivateData } from "../../api";
 
 export const PrivateScreen = ({ history }) => {

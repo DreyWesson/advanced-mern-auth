@@ -1,4 +1,4 @@
-import User from "../models/Users.js";
+import User from "../models/user.model.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";

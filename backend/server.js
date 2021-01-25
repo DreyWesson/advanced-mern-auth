@@ -1,10 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
-import authRoutes from "./routes/auth.js";
-import privateRoutes from "./routes/private.js";
-import errorResponse from "./middleware/error.js";
-import { shield } from "./middleware/auth.js";
+import authRoutes from "./routes/auth.routes.js";
+import privateRoutes from "./routes/private.routes.js";
+import errorResponse from "./middleware/error.middleware.js";
+import { shield } from "./middleware/auth.middleware.js";
 import morgan from "morgan";
 
 dotenv.config();

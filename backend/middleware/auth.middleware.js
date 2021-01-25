@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/Users.js";
+import User from "../models/user.model.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 export const shield = async (req, res, next) => {

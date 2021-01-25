@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./styles/LoginScreen.css";
 import { postData } from "../../api";
