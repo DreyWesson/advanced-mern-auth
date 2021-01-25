@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getPrivateData } from "../../api";
 
 export const PrivateScreen = ({ history }) => {
   const [error, setError] = useState("");
@@ -9,25 +10,18 @@ export const PrivateScreen = ({ history }) => {
     if (!localStorage.getItem("authToken")) {
       history.push("/login");
     }
-    const fetchPrivateDate = async () => {
+    const fetchPrivateData = async () => {
       const authToken = localStorage.getItem("authToken");
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-      };
-      console.log(authToken);
+
       try {
-        const { data } = await axios.get("/api/private", config);
-        console.log(data);
+        const { data } = await getPrivateData(authToken);
         setPrivateData(data?.data);
       } catch (error) {
         localStorage.removeItem("authToken");
         setError("You are not authorized, please login");
       }
     };
-    fetchPrivateDate();
+    fetchPrivateData();
   }, [history]);
 
   const logoutHandler = () => {

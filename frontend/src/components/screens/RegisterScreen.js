@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./styles/RegisterScreen.css";
+import { postData } from "../../api";
 
 export const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -19,12 +20,6 @@ export const RegisterScreen = ({ history }) => {
   const registerHandler = async (e) => {
     e.preventDefault();
 
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-
     if (password !== confirmPassword) {
       setPassword("");
       setConfirmPassword("");
@@ -34,17 +29,13 @@ export const RegisterScreen = ({ history }) => {
       return setError("Passwords do not match");
     }
 
+    const userDetails = {
+      username,
+      email,
+      password,
+    };
     try {
-      const { data } = await axios.post(
-        "/api/auth/register",
-        {
-          username,
-          email,
-          password,
-        },
-        config
-      );
-
+      const { data } = await postData("/api/auth/register", userDetails);
       localStorage.setItem("authToken", data.token);
       history.push("/");
     } catch (error) {

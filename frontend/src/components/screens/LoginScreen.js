@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./styles/LoginScreen.css";
+import { postData } from "../../api";
 
 export const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -16,20 +17,10 @@ export const LoginScreen = ({ history }) => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
+    const userDetails = { email, password };
 
     try {
-      const { data } = await axios.post(
-        "/api/auth/login",
-        { email, password },
-        config
-      );
-
+      const { data } = await postData("/api/auth/login", userDetails);
       localStorage.setItem("authToken", data.token);
       history.push("/");
     } catch (error) {

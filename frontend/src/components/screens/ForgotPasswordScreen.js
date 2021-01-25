@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./styles/ForgotPasswordScreen.css";
+import { postData } from "../../api";
 
 export const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
@@ -9,20 +10,9 @@ export const ForgotPasswordScreen = () => {
 
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
-
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-
+    const userEmail = { email };
     try {
-      const { data } = await axios.post(
-        "/api/auth/forgotpassword",
-        { email },
-        config
-      );
-
+      const { data } = await postData("/api/auth/forgotpassword", userEmail);
       setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);
